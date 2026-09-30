@@ -1,85 +1,59 @@
-# IAI SLE-2: BFS vs DFS Profiling
+# IAI SLE-2 – BFS and DFS
 
-## Course
-02AML204 - Introduction to Artificial Intelligence
+## Aim
+To implement and compare BFS and DFS for searching a small graph.
 
-## Objective
-Compare Breadth-First Search (BFS) and Depth-First Search (DFS) on the same graph using:
-1. Execution time
-2. Number of nodes expanded
-3. `timeit` repeated execution
-4. `py-spy` flame-graph profiling
+## Problem Statement
+Search for the goal node J starting from node A using BFS and DFS.
+
+## Algorithms Used
+
+### BFS
+BFS (Breadth First Search) explores nodes level by level.
+It uses a queue.
+
+### DFS
+DFS (Depth First Search) explores one path deeply before backtracking.
+It uses a stack.
 
 ## Graph
+The same graph is used for both BFS and DFS.
+
 Start node: A  
 Goal node: J
 
-The graph is defined directly in `bfs_dfs.py`.
+## Performance Measurement
+Python's `timeit` module is used to measure execution time.
 
-## Run the comparison
+The algorithms are executed 10,000 times for each test.
 
-```bash
-python bfs_dfs.py
-```
+## Profiling
+`py-spy` is used for performance profiling.
 
-The program performs 3 timing tests, with 10,000 executions in each test, and prints the average batch time.
+Flame graphs are generated for both BFS and DFS.
 
-## Generate flame graphs
-
-Install `py-spy`:
-
-```bash
-python -m pip install py-spy
-```
-
-BFS:
-
-```bash
-py -m py_spy record --format flamegraph --output profiling\bfs_profile.svg -- python profiling\pyspy_target.py bfs
-```
-
-DFS:
-
-```bash
-py -m py_spy record --format flamegraph --output profiling\dfs_profile.svg -- python profiling\pyspy_target.py dfs
-```
-
-The generated files are:
-
+Files:
 - `profiling/bfs_profile.svg`
 - `profiling/dfs_profile.svg`
 
-Open the SVG files in a browser to view the flame graphs.
+## Results
 
-## Important
-Execution times depend on the computer, Python version, operating system, and background processes. Therefore, do not copy a friend's timing values. Use the values printed by your own run.
+BFS:
+- Average time: 24.67 ms
+- Nodes expanded: 10
 
-The flame graph is profiling evidence: it shows where the Python program spends sampled execution time while BFS or DFS is running.
+DFS:
+- Average time: 17.46 ms
+- Nodes expanded: 9
 
-## Simple viva explanation
+## Conclusion
+For the selected graph, DFS took less average time and expanded fewer nodes than BFS.
 
-**BFS:** searches level by level and uses a queue.
+The result can change depending on the graph structure and goal-node location.
 
-**DFS:** goes deep along a path and backtracks, using a stack/recursion.
-
-**Empirical profiling:** running an algorithm and measuring its actual performance.
-
-**timeit:** Python module used to measure execution time.
-
-**py-spy:** a Python sampling profiler that can generate a flame graph.
-
-**Flame graph:** a visual representation of where execution time is spent.
-
-## Project structure
-
-```text
-IAI_SLE2_BFS_DFS/
-├── bfs_dfs.py
-├── profiling/
-│   ├── pyspy_target.py
-│   ├── bfs_profile.svg      # generated after running py-spy
-│   └── dfs_profile.svg      # generated after running py-spy
-├── requirements.txt
-├── run_profiling.bat
-└── README.md
-```
+## Tools Used
+- Python
+- timeit
+- py-spy
+- Flame Graph
+- GitHub

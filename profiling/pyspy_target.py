@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -8,21 +9,25 @@ from bfs_dfs import GRAPH, START, GOAL, bfs, dfs
 
 
 def run_bfs():
-    for _ in range(10000):
+    print("Starting BFS...")
+    for _ in range(1000000):
         bfs(GRAPH, START, GOAL)
 
 
 def run_dfs():
-    for _ in range(10000):
+    print("Starting DFS...")
+    for _ in range(1000000):
         dfs(GRAPH, START, GOAL)
 
 
 if __name__ == "__main__":
-    algorithm = sys.argv[1].lower() if len(sys.argv) > 1 else "bfs"
+    algorithm = sys.argv[1].lower()
+
+    print("PID:", os.getpid())
+    print("Attach py-spy now, then press ENTER.")
+    input()
 
     if algorithm == "bfs":
         run_bfs()
     elif algorithm == "dfs":
         run_dfs()
-    else:
-        raise SystemExit("Use: python profiling/pyspy_target.py bfs OR dfs")
